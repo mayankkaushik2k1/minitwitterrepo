@@ -1,2 +1,2 @@
-Files which we will ignore
+**/__pycache__/**
 *.sqlite3
