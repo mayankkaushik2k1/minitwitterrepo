@@ -58,7 +58,7 @@ ROOT_URLCONF = 'twitter.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'/home/mayank/minitwitterrepo/twitter/users/templtes'],
+        'DIRS': [r'/home/mayank/projects/minitwitterrepo/twitter/users/templtes'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
