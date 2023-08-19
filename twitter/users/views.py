@@ -34,9 +34,7 @@ def signup(request):
     return render(request, 'users/signup.html', {'form': form})
 
 def login_view(request):
-    import pdb
-    pdb.set_trace()
-    return redirect(signup)
+    return redirect('users:signup')
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
