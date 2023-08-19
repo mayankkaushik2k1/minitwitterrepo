@@ -1,0 +1,31 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Twitter Clone{% endblock %}</title>
+    <!-- Include your CSS links here -->
+</head>
+<body>
+    <header>
+        <h1>{% block header %}<a href="/">Twitter Clone</a>{% endblock %}</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/explore/">Explore</a></li>
+                <!-- Add more menu items as needed -->
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        <!-- Content of child templates will be inserted here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ current_year }} Twitter Clone. All rights reserved.</p>
+    </footer>
+</body>
+</html>
