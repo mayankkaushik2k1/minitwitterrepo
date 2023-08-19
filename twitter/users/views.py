@@ -1,20 +1,57 @@
+
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login , logout
+from django.urls import reverse
+from .forms import SignUpForm , LoginForm
 
 
 
 
 def home(request):
-    return render(request,'users/index.html')  
+    return render(request,'users/home.html')  
     #import pdb
     #pdb.set_trace()
     #return HttpResponse('welcome to twitter')
 
+
 def signup(request):
     if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            #user.refresh_from_db()
+            #user.profile.email = form.cleaned_data.get('email')
+            #user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect(reverse('home'))
+    else:
+        form = SignUpForm()
+    return render(request, 'users/signup.html', {'form': form})
+
+def login_view(request):
+    import pdb
+    pdb.set_trace()
+    return redirect(signup)
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('home')
+    else:
+        form = LoginForm()
+    return render(request, 'users/login.html', {'form': form})
+
+    
+    ''' if request.method == 'POST':
         username = request.POST['username']
         fname = request.POST['fname']
         lname = request.POST['lname']
@@ -49,11 +86,11 @@ def signup(request):
         messages.success(request, 'Your account is successfully created')
 
         return redirect('signin')
+'''
+   # return render(request, 'users/signup.html')
 
-    return render(request, 'users/signup.html')
 
-
-
+'''
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -82,3 +119,4 @@ def signout(request):
     return redirect('home')
     #return render(request,'signout/signout.html')
 # Create your views here.
+'''
